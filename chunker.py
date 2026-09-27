@@ -82,22 +82,58 @@ def fallback_split(
 
 def split_documents(documents: list[Document]) -> list[Chunk]:
     """
-    Split documents into chunks. ⚠️ REPLACE THE BODY OF THIS IN MILESTONE 3.
+    Split documents by paragraph boundaries, targeting 100-400 characters per chunk.
 
-    Right now it just calls the fallback. That is the plain, generic behaviour
-    the brief is talking about.
-
-    When you write your own strategy, set `produced_by` to
-    "chunker.py::split_documents" so your README's Sample Chunks section names
-    the right function. `app.py chunks` prints that string for you.
-
-    Things worth thinking about before you write any code:
-      - Are your documents short posts or long guides?
-      - Is the useful information in one sentence, or spread over a paragraph?
-      - Would splitting on paragraph breaks keep more thoughts intact than
-        splitting on a character count?
+    Strategy: documents in campus_life are short posts with clear paragraphs.
+    Splitting on paragraph breaks keeps complete thoughts together, avoiding
+    sentences cut mid-thought. Target range of 100-400 chars aligns with
+    acceptance criteria and prevents tiny junk chunks (just headings).
     """
-    return fallback_split(documents)
+    chunks: list[Chunk] = []
+
+    for doc in documents:
+        paragraphs = doc.text.split("\n\n")
+        current_chunk = []
+        current_length = 0
+
+        for para in paragraphs:
+            para = para.strip()
+            if not para:
+                continue
+
+            para_length = len(para)
+
+            if current_length + para_length <= 400:
+                current_chunk.append(para)
+                current_length += para_length + 1
+            else:
+                if current_chunk:
+                    chunk_text = "\n\n".join(current_chunk).strip()
+                    if chunk_text and len(chunk_text) >= 100:
+                        chunks.append(
+                            Chunk(
+                                text=chunk_text,
+                                source=doc.source,
+                                index=len([c for c in chunks if c.source == doc.source]),
+                                produced_by="chunker.py::split_documents",
+                            )
+                        )
+                current_chunk = [para]
+                current_length = para_length
+
+        if current_chunk:
+            chunk_text = "\n\n".join(current_chunk).strip()
+            if chunk_text and len(chunk_text) >= 100:
+                chunks.append(
+                    Chunk(
+                        text=chunk_text,
+                        source=doc.source,
+                        index=len([c for c in chunks if c.source == doc.source]),
+                        produced_by="chunker.py::split_documents",
+                    )
+                )
+
+    return chunks
 
 
 def describe(chunks: list[Chunk]) -> str:

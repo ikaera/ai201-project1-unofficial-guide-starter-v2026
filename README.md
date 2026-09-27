@@ -29,18 +29,11 @@
 
 ## Chunking Strategy
 
-**Chunk size:**
-**Overlap:**
+**Strategy:** Paragraph-based chunking with 100-400 character target range
 
-<!-- What about YOUR documents made you pick these numbers? Short posts and
-     long sectioned guides don't want the same chunking, and "800 seemed
-     reasonable" earns nothing. Point at something you noticed when you read
-     the documents in Milestone 1.
+**Why:** Documents in campus_life are short posts (avg 317 characters) organized as clear paragraphs covering separate topics. Fixed-window chunking would split related ideas or keep unrelated topics together. Splitting on paragraph boundaries keeps complete thoughts intact — a student's answer about laundry costs stays separate from their answer about noise levels. The 100-400 character range prevents tiny "junk" chunks (just headings) while avoiding chunks that mix multiple unrelated topics.
 
-     If you changed your mind partway through, say so and say why. That's worth
-     more than pretending you got it right first time.
-
-     Milestone 3. -->
+**Result:** 88 documents → 98 chunks, average 282 characters (range 101-400)
 
 ## Sample Chunks
 
@@ -53,29 +46,46 @@
 
      Milestone 3. -->
 
-**Chunk 1** — source: `` — produced by: ``
+**Chunk 1** — source: `admin_add_drop_deadline.txt` — produced by: `chunker.py::split_documents`
 
 ```
+On the add/drop deadline
+
+You can add a course through the end of the second week. Dropping is a longer window — through the end of week six — but a drop after week two shows as a W on your transcript. Nothing anywhere on the registrar's site says this plainly, and students find out from each other.
 ```
 
-**Chunk 2** — source: `` — produced by: ``
+**Chunk 2** — source: `course_biol_160_workload.txt` — produced by: `chunker.py::split_documents`
 
 ```
+Workload for BIOL 160 Cell Biology
+
+People keep asking so: 9 to 11 hours a week, the heaviest first-year course by reputation. That's real time, not optimistic time.
+
+It's front-loaded — the first month is heavier than the rest, partly because you're learning the format.
 ```
 
-**Chunk 3** — source: `` — produced by: ``
+**Chunk 3** — source: `course_math_220.txt` — produced by: `chunker.py::split_documents`
 
 ```
+MATH 220 Linear Algebra
+
+I lived here my sophomore year. Format is chalk-and-talk lecture, weekly problem sets marked for correctness. Assessment: two midterms and a cumulative final. Curved to a b- median.
+
+Expect 6 to 8 hours a week, almost all of it on problem sets.
+
+The one piece of advice: the problem sets are the course; the lectures make sense afterwards rather than during.
 ```
 
-**Chunk 4** — source: `` — produced by: ``
+**Chunk 4** — source: `dining_the_atrium.txt` — produced by: `chunker.py::split_documents`
 
 ```
+Hours are 8:00am to 6:00pm weekdays. Costs one meal swipe for a sandwich-plus-drink combination, or à la carte.
 ```
 
-**Chunk 5** — source: `` — produced by: ``
+**Chunk 5** — source: `housing_innisfree_hall.txt` — produced by: `chunker.py::split_documents`
 
 ```
+Laundry costs $1.75 wash, $1.75 dry, app-based. On noise: moderate; the building is L-shaped and the short wing is much quieter.
 ```
 
 ## Sample Answer
