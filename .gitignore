@@ -1,27 +1,52 @@
-# API keys — never commit these
+# ────────────────────────────────────────────────────────────────────────────
+# Secrets & Local Config
+# ────────────────────────────────────────────────────────────────────────────
 .env
+.env.local
+CLAUDE.md
 
+# ────────────────────────────────────────────────────────────────────────────
 # Python
+# ────────────────────────────────────────────────────────────────────────────
 __pycache__/
 *.py[cod]
 *.egg-info/
+dist/
+build/
 .venv/
 venv/
 env/
+*.egg
 
-# Jupyter
+# ────────────────────────────────────────────────────────────────────────────
+# IDE & Editor
+# ────────────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# ────────────────────────────────────────────────────────────────────────────
+# Jupyter & Notebooks
+# ────────────────────────────────────────────────────────────────────────────
 .ipynb_checkpoints/
+*.ipynb
 
-# Local vector store — rebuilt by `python app.py index`
+# ────────────────────────────────────────────────────────────────────────────
+# Project Data (rebuilt on demand)
+# ────────────────────────────────────────────────────────────────────────────
 chroma_db/
 chroma/
-
-# Cached model responses
 .cache/
 
-# OS noise
-.DS_Store
+# ────────────────────────────────────────────────────────────────────────────
+# OS Files
+# ────────────────────────────────────────────────────────────────────────────
 Thumbs.db
 
-# NOTE: results/ is deliberately NOT ignored. Your run logs are evidence that
-# the test actually happened, and they're part of what gets graded. Commit them.
+# ────────────────────────────────────────────────────────────────────────────
+# NOTE: results/ is deliberately NOT ignored. Run logs are evidence that
+# testing actually happened and are part of the grading. Commit them.
+# ────────────────────────────────────────────────────────────────────────────
