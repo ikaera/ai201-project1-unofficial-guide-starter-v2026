@@ -23,8 +23,14 @@ For at least 4 of my 5 test questions, the retrieved chunks include one that
 contains the answer.
 
 **Why this target:**
-<!-- e.g. "One of my questions is about a topic only two documents mention, so
-     I expect that one to be hard." -->
+
+Four questions have very specific facts in single sentences:
+- "Wait times at Kestrel Commons?" → "20 to 25 minutes"
+- "Laundry cost at Aldridge Hall?" → "$1.75"
+- "Distance to science quad?" → "four minutes"
+- "Drop after week two?" → "shows as W on transcript"
+
+One question is harder because the answer is buried in a paragraph with other information about deadlines, so retrieval might get the document but not the exact sentence with "second week".
 
 ---
 
@@ -33,8 +39,8 @@ contains the answer.
 Every answer the system produces names at least one source document.
 
 **Why this target:**
-<!-- Why all five and not four? What about your setup makes that achievable —
-     or what would have to go wrong for it not to be? -->
+
+Naming a source is all-or-nothing. When the system generates an answer, it either always includes the document name or never does. There's no middle ground — it's built into how the system works, not something that sometimes works and sometimes doesn't. If sourcing is working, all 5 answers will have sources. If it's broken, none will.
 
 ---
 
@@ -50,12 +56,14 @@ in at least 4 of 5 tries.
      just keep five of them, or the "4 of 5" above has nothing to be 4 of. -->
 
 **Why this target:**
-<!-- What did your distances look like when you set the cutoff in Milestone 4?
-     Was there a clean gap, or did the two groups overlap? -->
+
+Most out-of-scope questions are completely unrelated to campus life (Mongolia, oil changes, World Cup, ibuprofen). But one question — "How do I write a for loop in Rust?" — might accidentally match CS course documents, even though it's not about campus. The other four should definitely get refused. That's why I expect 4 of 5 to be stopped, with one possibly slipping through.
 
 ---
 
 ## 4. Something about your chunks
+
+At least 4 of 5 sampled chunks contain between 100 and 400 characters, with no chunk ending mid-sentence.
 
 <!-- YOU WRITE THIS ONE.
 
@@ -73,11 +81,17 @@ in at least 4 of 5 tries.
 
 **Why this target:**
 
-
+- Documents in my corpus average 317 characters
+- Chunks between 100-400 characters fit whole ideas without splitting sentences
+- 100 characters minimum prevents tiny "junk" chunks (just headings)
+- 400 characters maximum prevents mixing unrelated topics
+- 4 of 5 accounts for rare edge cases where formatting is unusual
 
 ---
 
 ## 5. Your choice
+
+At least 4 of 5 answers include a direct quote of at least 8 words from the source document.
 
 <!-- YOU WRITE THIS ONE TOO.
 
@@ -91,7 +105,10 @@ in at least 4 of 5 tries.
 
 **Why this target:**
 
-
+- Direct quotes prove answers come from the source, not made up
+- 8 words is the minimum to be meaningful (longer than just 1-2 word fragments)
+- 8 words is short enough to fit naturally into an answer
+- 4 of 5 allows one answer to be paraphrased when a quote doesn't fit smoothly
 
 ---
 
