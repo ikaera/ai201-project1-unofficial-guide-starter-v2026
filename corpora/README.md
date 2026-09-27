@@ -61,7 +61,8 @@ your relevance cutoff still separates in-corpus from out-of-corpus
 questions, since 0.6 was chosen against these three.
 
 That check is Milestone 4, and it is the same check that makes 0.6 a cutoff
-rather than a number. Treat the default as a starting point, not an answer —
+rather than 
+a number. Treat the default as a starting point, not an answer —
 it was set against the corpora above at their shipped chunk settings, and
 changing the chunking moves the distances underneath it. Measuring it
 yourself is the milestone.
